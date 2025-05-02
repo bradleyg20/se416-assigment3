@@ -1,0 +1,19 @@
+Strategy 1: Avoid Repeated average() Calls (Line 41, 42, 44)
+The method average(data2[i][j]) is called multiple times in a row with the same input.
+Optimization: Compute it once per loop iteration and store it in a temporary variable:
+  - double avgData2 = average(data2[i][j]);
+
+Strategy 2: Avoid Unnecessary Math.pow() on Constants (Line 39)
+Math.pow(limit[i][j], 2.0) is computed every time, but the result doesn’t depend on k.
+Optimization: Move it outside the k-loop:
+  - double limitSquared = Math.pow(limit[i][j], 2.0);
+
+Strategy 3: Reduce Overuse of Math.abs() and Math.pow() (Line 44)
+Math.pow(Math.abs(...), 3) is expensive, especially repeated for both data and data2.
+Optimization: Use multiplication instead:
+  - double val1 = data[i][j][k];
+  - double val2 = data2[i][j][k];
+  - double cube1 = val1 * val1 * val1;
+  - double cube2 = val2 * val2 * val2;
+
+The Codejamming can be found in the java file
