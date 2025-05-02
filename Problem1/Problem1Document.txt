@@ -1,1 +1,14 @@
-Hello
+The iterative permutation generator was designed to follow high-quality software engineering principles:
+  - Clear naming: Functions like generatePermutationsIteratively clearly describe their purpose.
+
+  - Modular design: The code is split into methods with single responsibilities — one for iterative, one for recursive logic — improving cohesion and easing future testing.
+
+  - Low coupling: The permutation logic is isolated from input/output operations.
+
+  - Robustness: The program performs basic input validation (i.e. checks for empty or null input).
+
+  - Readable control flow: The iterative logic builds permutations step-by-step using nested loops, with string slicing and concatenation.
+
+
+I personally prefer the recursive implementation in terms of readability and conceptual clarity. It more directly matches the concept of permutation, choose one character and recursively permute the rest. This makes the flow of the code more easy to explain and read. However, with extremely large strings I could see the iterative approach being better than recursive performance-wise.
+
