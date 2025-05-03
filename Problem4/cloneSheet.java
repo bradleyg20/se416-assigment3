@@ -72,11 +72,10 @@ private String decideName(XSSFSheet src,
 }
 
 /**
- * Copies every internal package relationship except the drawing
- * (handled separately) to keep workbook structure intact.
+ * Copies every internal OPC relationship except the drawing.
  *
- * @param src source sheet
- * @param dst destination sheet
+ * @param src sheet providing the relationships (input)
+ * @param dst sheet that will receive the relationships (modified)
  */
 private void copyPackageRelations(XSSFSheet src,
                                   XSSFSheet dst) {
@@ -88,12 +87,12 @@ private void copyPackageRelations(XSSFSheet src,
 }
 
 /**
- * Duplicates all external OPC relationships so that hyperlinks and other
- * external references continue to resolve in the clone.
+ * Replicates all external hyperlinks referenced by the sheet part.
  *
  * @param src source sheet
  * @param dst destination sheet
  * @throws POIXMLException if OPC rejects the new relationship
+ * @throws InvalidFormatException (runtime) if the target URI is malformed
  */
 private void copyExternalLinks(XSSFSheet src,
                                XSSFSheet dst) {
