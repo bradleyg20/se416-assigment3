@@ -4,7 +4,7 @@
 Takes an input string and prints permutations of given string from an iterative approach and recursive approach
 
 ## Problem 2
-Updated version of Assigment 1 Problem 4 using feedback from Assignment 1
+Updated version of Assigment 1 Problem 4 using feedback from Assignment 1. More details in Problem4\README.md
 
 ## Problem 3
 ### SensorDataProcessor.java
