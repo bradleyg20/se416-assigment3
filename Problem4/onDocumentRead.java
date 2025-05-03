@@ -1,8 +1,5 @@
-// ---------------------------------------------------------------------
-// 1) Dispatch table: place it as a static field of XSSFWorkbook
-// ---------------------------------------------------------------------
 
-
+// Dispatch table: as a static field of XSSFWorkbook
 private static final Map<
         Class<?>,
         BiConsumer<XSSFWorkbook,RelationPart>> DISPATCH = Map.ofEntries(
