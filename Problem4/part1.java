@@ -82,7 +82,7 @@ private void copyPackageRelations(XSSFSheet src,
                                   XSSFSheet dst) {
     for (RelationPart rp : src.getRelationParts()) {
         POIXMLDocumentPart part = rp.getDocumentPart();
-        if (part instanceof XSSFDrawing) continue;   // postpone
+        if (part instanceof XSSFDrawing) continue; // postpone
         addRelation(rp, dst);
     }
 }
@@ -113,7 +113,6 @@ private void copyExternalLinks(XSSFSheet src,
         throw new POIXMLException("Failed to clone external links", e);
     }
 }
-
 
 /**
  * Performs an in-memory round-trip of the sheet XML to create a byte-for-byte
@@ -170,10 +169,10 @@ private void copyDrawing(XSSFSheet src,
                          XSSFSheet dst) {
 
     XSSFDrawing srcDrawing = src.getDrawingPatriarch();
-    if (srcDrawing == null) return;          // nothing to do
+    if (srcDrawing == null) return; // nothing to do
 
     CTWorksheet ct = dst.getCTWorksheet();
-    if (ct.isSetDrawing()) {                 // remove stub created by POI
+    if (ct.isSetDrawing()) { // remove stub created by POI
         ct.unsetDrawing();
     }
 
@@ -181,7 +180,8 @@ private void copyDrawing(XSSFSheet src,
     dstDrawing.getCTDrawing().set(srcDrawing.getCTDrawing());
 
     /* copy drawing-level relationships */
-    for (RelationPart rp : srcDrawing.getRelationParts()) {
+    List<RelationPart> srcRels = srcDrawing.getRelationParts();
+    for (RelationPart rp : srcRels) {
         addRelation(rp, dstDrawing);
     }
 }
