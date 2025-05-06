@@ -1,6 +1,3 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-
 public class SensorDataProcessor{
 
     // Senson data and limits.
@@ -38,33 +35,29 @@ public class SensorDataProcessor{
 
             for (i = 0; i < data.length; i++) {
                 for (j = 0; j < data[0].length; j++) {
-                    double limitSquared = Math.pow(limit[i][j], 2.0);
-            
                     for (k = 0; k < data[0][0].length; k++) {
-                        double val = data[i][j][k];
-                        data2[i][j][k] = val / d - limitSquared;
-            
-                        double avgData2 = average(data2[i][j]);
-                        double avgData = average(data[i][j]);
-            
-                        if (avgData2 > 10 && avgData2 < 50) break;
-            
-                        else if (Math.max(val, data2[i][j][k]) > val) break;
-            
-                        else {
-                            double cubeVal = val * val * val;
-                            double cubeData2 = data2[i][j][k] * data2[i][j][k] * data2[i][j][k];
-            
-                            if (cubeVal < cubeData2 && avgData < data2[i][j][k] && (i + 1) * (j + 1) > 0)
-                                data2[i][j][k] *= 2;
-                        }
+                        data2[i][j][k] = data[i][j][k] / d - Math.pow(limit[i][j], 2.0);
+
+                        if (average(data2[i][j]) > 10 && average(data2[i][j]) < 50)
+                            break;
+                        else if (Math.max(data[i][j][k], data2[i][j][k]) > data[i][j][k])
+                            break;
+                        else if (Math.pow(Math.abs(data[i][j][k]), 3) < Math.pow(Math.abs(data2[i][j][k]), 3)
+                                && average(data[i][j]) < data2[i][j][k] && (i + 1) * (j + 1) > 0)
+                            data2[i][j][k] *= 2;
+                        else
+                            continue;
                     }
+                    
+                    out.write(data2[i][j] + "\t");
                 }
             }
+
             out.close();
-        }  
-        catch (Exception e) {
+
+        } catch (Exception e) {
             System.out.println("Error= " + e);
         }
     }
+    
 }
